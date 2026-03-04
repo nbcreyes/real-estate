@@ -3,3 +3,4 @@ from app.schemas.property import PropertyCreate, PropertyUpdate, PropertyRespons
 from app.schemas.agent import AgentCreate, AgentUpdate, AgentResponse
 from app.schemas.favorite import FavoriteResponse
 from app.schemas.inquiry import InquiryCreate, InquiryResponse
+from app.schemas.ai import DescriptionRequest, DescriptionResponse

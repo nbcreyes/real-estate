@@ -6,6 +6,7 @@ from app.routers.agents import router as agents_router
 from app.routers.favorites import router as favorites_router
 from app.routers.inquiries import router as inquiries_router
 from app.routers.images import router as images_router
+from app.routers.ai import router as ai_router
 
 app = FastAPI(title="Real Estate API")
 
@@ -23,6 +24,7 @@ app.include_router(agents_router)
 app.include_router(favorites_router)
 app.include_router(inquiries_router)
 app.include_router(images_router)
+app.include_router(ai_router)
 
 @app.get("/")
 def root():
