@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import Button from "./Button"
@@ -5,10 +6,12 @@ import Button from "./Button"
 export default function Navbar() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const handleLogout = () => {
     logout()
     navigate("/")
+    setMenuOpen(false)
   }
 
   return (
@@ -16,7 +19,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="text-xl font-bold text-primary-600">EstateHub</Link>
-          <div className="flex items-center gap-6">
+
+          <div className="hidden md:flex items-center gap-6">
             <Link to="/properties" className="text-sm text-gray-600 hover:text-primary-600 transition-colors">Properties</Link>
             <Link to="/agents" className="text-sm text-gray-600 hover:text-primary-600 transition-colors">Agents</Link>
             <Link to="/map" className="text-sm text-gray-600 hover:text-primary-600 transition-colors">Map</Link>
@@ -36,7 +40,39 @@ export default function Navbar() {
               </div>
             )}
           </div>
+
+          <button
+            className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <div className="w-5 h-0.5 bg-gray-600 mb-1"></div>
+            <div className="w-5 h-0.5 bg-gray-600 mb-1"></div>
+            <div className="w-5 h-0.5 bg-gray-600"></div>
+          </button>
         </div>
+
+        {menuOpen && (
+          <div className="md:hidden border-t border-gray-100 py-3 flex flex-col gap-1">
+            <Link to="/properties" onClick={() => setMenuOpen(false)} className="px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">Properties</Link>
+            <Link to="/agents" onClick={() => setMenuOpen(false)} className="px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">Agents</Link>
+            <Link to="/map" onClick={() => setMenuOpen(false)} className="px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">Map</Link>
+            <Link to="/mortgage" onClick={() => setMenuOpen(false)} className="px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">Calculator</Link>
+            {user ? (
+              <>
+                <Link to="/favorites" onClick={() => setMenuOpen(false)} className="px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">Favorites</Link>
+                {(user.role === "agent" || user.role === "admin") && (
+                  <Link to="/dashboard" onClick={() => setMenuOpen(false)} className="px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">Dashboard</Link>
+                )}
+                <button onClick={handleLogout} className="px-3 py-2 text-sm text-left text-red-500 hover:bg-gray-50 rounded-lg">Logout</button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" onClick={() => setMenuOpen(false)} className="px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">Login</Link>
+                <Link to="/register" onClick={() => setMenuOpen(false)} className="px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">Sign Up</Link>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </nav>
   )

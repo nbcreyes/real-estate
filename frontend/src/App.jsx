@@ -37,12 +37,12 @@ export default function App() {
             <Route path="/agents" element={<Agents />} />
             <Route path="/agents/:id" element={<AgentDetail />} />
             <Route path="/favorites" element={<ProtectedRoute><Favorites /></ProtectedRoute>} />
-            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/dashboard/properties" element={<ProtectedRoute><AdminProperties /></ProtectedRoute>} />
-            <Route path="/dashboard/agents" element={<ProtectedRoute><AdminAgents /></ProtectedRoute>} />
-            <Route path="/dashboard/users" element={<ProtectedRoute><AdminUsers /></ProtectedRoute>} />
-            <Route path="/create-listing" element={<ProtectedRoute><CreateListing /></ProtectedRoute>} />
-            <Route path="/ai-generator" element={<ProtectedRoute><AIGenerator /></ProtectedRoute>} />
+            <Route path="/dashboard" element={<ProtectedRoute roles={["agent", "admin"]}><Dashboard /></ProtectedRoute>} />
+            <Route path="/dashboard/properties" element={<ProtectedRoute roles={["agent", "admin"]}><AdminProperties /></ProtectedRoute>} />
+            <Route path="/dashboard/agents" element={<ProtectedRoute roles={["admin"]}><AdminAgents /></ProtectedRoute>} />
+            <Route path="/dashboard/users" element={<ProtectedRoute roles={["admin"]}><AdminUsers /></ProtectedRoute>} />
+            <Route path="/create-listing" element={<ProtectedRoute roles={["agent", "admin"]}><CreateListing /></ProtectedRoute>} />
+            <Route path="/ai-generator" element={<ProtectedRoute roles={["agent", "admin"]}><AIGenerator /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
