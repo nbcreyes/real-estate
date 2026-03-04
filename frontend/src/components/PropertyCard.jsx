@@ -3,9 +3,9 @@ import { useState } from "react"
 import api from "../services/api"
 import { useAuth } from "../context/AuthContext"
 
-export default function PropertyCard({ property, onFavoriteToggle }) {
+export default function PropertyCard({ property, initialFavorited = false, onFavoriteToggle }) {
   const { user } = useAuth()
-  const [favorited, setFavorited] = useState(false)
+  const [favorited, setFavorited] = useState(initialFavorited)
 
   const primaryImage = property.images?.find(img => img.is_primary) || property.images?.[0]
 
