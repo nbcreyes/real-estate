@@ -2,6 +2,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers.auth import router as auth_router
 from app.routers.properties import router as properties_router
+from app.routers.agents import router as agents_router
+from app.routers.favorites import router as favorites_router
+from app.routers.inquiries import router as inquiries_router
+from app.routers.images import router as images_router
 
 app = FastAPI(title="Real Estate API")
 
@@ -15,6 +19,10 @@ app.add_middleware(
 
 app.include_router(auth_router)
 app.include_router(properties_router)
+app.include_router(agents_router)
+app.include_router(favorites_router)
+app.include_router(inquiries_router)
+app.include_router(images_router)
 
 @app.get("/")
 def root():
