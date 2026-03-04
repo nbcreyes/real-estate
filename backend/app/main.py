@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.db.database import Base, engine
+from app.routers.auth import router as auth_router
+from app.routers.properties import router as properties_router
 
 app = FastAPI(title="Real Estate API")
 
@@ -11,6 +12,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(auth_router)
+app.include_router(properties_router)
 
 @app.get("/")
 def root():
