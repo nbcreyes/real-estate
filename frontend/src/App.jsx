@@ -15,6 +15,8 @@ import Dashboard from "./pages/Dashboard"
 import AdminProperties from "./pages/admin/AdminProperties"
 import AdminAgents from "./pages/admin/AdminAgents"
 import AdminUsers from "./pages/admin/AdminUsers"
+import CreateListing from "./pages/CreateListing"
+import AIGenerator from "./pages/AIGenerator"
 import ProtectedRoute from "./components/ProtectedRoute"
 import NotFound from "./pages/NotFound"
 
@@ -39,6 +41,8 @@ export default function App() {
             <Route path="/dashboard/properties" element={<ProtectedRoute><AdminProperties /></ProtectedRoute>} />
             <Route path="/dashboard/agents" element={<ProtectedRoute><AdminAgents /></ProtectedRoute>} />
             <Route path="/dashboard/users" element={<ProtectedRoute><AdminUsers /></ProtectedRoute>} />
+            <Route path="/create-listing" element={<ProtectedRoute><CreateListing /></ProtectedRoute>} />
+            <Route path="/ai-generator" element={<ProtectedRoute><AIGenerator /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

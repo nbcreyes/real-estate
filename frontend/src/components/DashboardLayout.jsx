@@ -6,6 +6,8 @@ const navItems = [
   { label: "Properties", path: "/dashboard/properties" },
   { label: "Agents", path: "/dashboard/agents" },
   { label: "Users", path: "/dashboard/users" },
+  { label: "Create Listing", path: "/create-listing" },
+  { label: "AI Generator", path: "/ai-generator" },
 ]
 
 export default function DashboardLayout({ children }) {
